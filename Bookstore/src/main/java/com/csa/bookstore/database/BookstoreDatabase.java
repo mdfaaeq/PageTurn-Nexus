@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
  * @author faaeq
  */
 
-public class Database {
+public class BookstoreDatabase {
     
     private static Map<Integer, Book> books = new HashMap<>();
     private static Map<Integer, Author> authors = new HashMap<>();
