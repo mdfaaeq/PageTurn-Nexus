@@ -96,22 +96,61 @@ public class CartResource {
     @PUT
     @Path("/items/{bookId}")
     public Response updateCart(@PathParam("customerId") int customerId, @PathParam("bookId") int bookId, CartItem cartItem) {
+        
+        // Verifying whether the customer already exists
         Customer existingCustomer = BookstoreDatabase.getCustomerById(customerId);
         if (existingCustomer == null) {
             throw new CustomerNotFoundException("Customer with ID " + customerId + " does not exist");
         }
         
+        // Checking whether the book is there
         Book book = BookstoreDatabase.getBookById(bookId);
         if (book == null) {
             throw new BookNotFoundException("Book with ID " + bookId + " does not exist");
         }
         
+        // Getting the cart of the relavent customer
+        Cart cart = BookstoreDatabase.getCartByCustomerId(customerId);
+        if (cart == null){
+            throw new CartNotFoundException("Cart for customer with ID " + customerId + " does not exist");
+        }
         
+        // Performing validation for the item
+        if (cartItem.getQuantity() <= 0) {
+            throw new InvalidInputException("Quantity must be greater than zero");
+        }
+        
+        // Checking for stock availability
+        if (cartItem.getQuantity() > book.getStock()) {
+            throw new OutOfStockException("Requested quantity exceeds available stock for book ID " + item.getBookId());
+        }
+        
+        if (cartItem.getBookId() != bookId){
+            throw new InvalidInputException("Book ID in the path does not match the one in the request body");
+        }
+        
+        cart.updateItem(bookId, cartItem.getBookId());
+        BookstoreDatabase.updateCart(cart);
+        
+        return Response.ok(cart).build();
     }
     
     @DELETE
-    @Path("/{id}")
-    public Response deleteBook(@PathParam("id") int id) {
+    @Path("/items/{bookId}")
+    public Response removeCart(@PathParam("customerId") int customerId, @PathParam("bookId") int bookId) {
+        
+        Customer customer = BookstoreDatabase.getCustomerById(customerId);
+        if (customer == null){
+            throw new CustomerNotFoundException("Customer with ID " + customerId + " does not exist");
+        }
+        
+        Cart cart = BookstoreDatabase.getCartByCustomerId(customerId);
+        if (cart == null){
+            throw new CartNotFoundException("Cart for customer with ID " + customerId + " does not exist");
+        }
+        
+        cart.removeItem(bookId);
+        BookstoreDatabase.updateCart(cart);
         
         return Response.status(Response.Status.NO_CONTENT).build();
     }
