@@ -4,7 +4,7 @@
  */
 package com.csa.bookstore.resource;
 
-import com.csa.bookstore.database.Database;
+import com.csa.bookstore.database.BookstoreDatabase;
 import com.csa.bookstore.entity.Author;
 import com.csa.bookstore.entity.Book;
 import com.csa.bookstore.exception.AuthorNotFoundException;
@@ -62,12 +62,12 @@ public class BookResource {
         }
         
         // Check if author exists
-        Author author = Database.getAuthorById(book.getAuthorId());
+        Author author = BookstoreDatabase.getAuthorById(book.getAuthorId());
         if (author == null) {
             throw new AuthorNotFoundException("Author with ID " + book.getAuthorId() + " does not exist");
         }
         
-        Book createdBook = Database.addBook(book);
+        Book createdBook = BookstoreDatabase.addBook(book);
         return Response.status(Status.CREATED)
                      .entity(createdBook)
                      .build();
@@ -75,14 +75,14 @@ public class BookResource {
     
     @GET
     public Response getAllBooks() {
-        List<Book> books = Database.getAllBooks();
+        List<Book> books = BookstoreDatabase.getAllBooks();
         return Response.ok(books).build();
     }
     
     @GET
     @Path("/{id}")
     public Response getBookById(@PathParam("id") int id) {
-        Book book = Database.getBookById(id);
+        Book book = BookstoreDatabase.getBookById(id);
         if (book == null) {
             throw new BookNotFoundException("Book with ID " + id + " does not exist");
         }
@@ -92,7 +92,7 @@ public class BookResource {
     @PUT
     @Path("/{id}")
     public Response updateBook(@PathParam("id") int id, Book book) {
-        Book existingBook = Database.getBookById(id);
+        Book existingBook = BookstoreDatabase.getBookById(id);
         if (existingBook == null) {
             throw new BookNotFoundException("Book with ID " + id + " does not exist");
         }
@@ -121,25 +121,25 @@ public class BookResource {
         }
         
         // Check if author exists
-        Author author = Database.getAuthorById(book.getAuthorId());
+        Author author = BookstoreDatabase.getAuthorById(book.getAuthorId());
         if (author == null) {
             throw new AuthorNotFoundException("Author with ID " + book.getAuthorId() + " does not exist");
         }
         
         book.setId(id);
-        Book updatedBook = Database.updateBook(book);
+        Book updatedBook = BookstoreDatabase.updateBook(book);
         return Response.ok(updatedBook).build();
     }
     
     @DELETE
     @Path("/{id}")
     public Response deleteBook(@PathParam("id") int id) {
-        Book book = Database.getBookById(id);
+        Book book = BookstoreDatabase.getBookById(id);
         if (book == null) {
             throw new BookNotFoundException("Book with ID " + id + " does not exist");
         }
         
-        Database.deleteBook(id);
+        BookstoreDatabase.deleteBook(id);
         return Response.status(Status.NO_CONTENT).build();
     }
 }
