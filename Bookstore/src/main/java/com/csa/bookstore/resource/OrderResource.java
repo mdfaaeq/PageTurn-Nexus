@@ -4,10 +4,49 @@
  */
 package com.csa.bookstore.resource;
 
+import com.csa.bookstore.database.BookstoreDatabase;
+import com.csa.bookstore.entity.Cart;
+import com.csa.bookstore.entity.Customer;
+import com.csa.bookstore.entity.Order;
+import com.csa.bookstore.exception.CartNotFoundException;
+import com.csa.bookstore.exception.CustomerNotFoundException;
+import com.csa.bookstore.exception.InvalidInputException;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+
 /**
  *
  * @author faaeq
  */
+
+@Path("/customers/{customerId}/orders")
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
 public class OrderResource {
+    
+    @POST
+    public Response createOrder(@PathParam("customerId") int customerId){
+        Customer customer = BookstoreDatabase.getCustomerById(customerId);
+        if (customer == null){
+            throw new CustomerNotFoundException("Customer with ID " + customerId + " does not exist");
+        }
+        
+        Cart cart = BookstoreDatabase.getCartByCustomerId(customerId);
+        if (cart == null){
+            throw new CartNotFoundException("Cart for customer with ID " + customerId + " does not exist");
+        }
+        
+        if (cart.getItems().isEmpty()){
+            throw new InvalidInputException("Cannot create an order with an empty cart");
+        }
+        
+        Order order = BookstoreDatabase.getOrderById(customerId);
+        return Response.status(Response.Status.CREATED).entity(order).build();
+    }
     
 }
