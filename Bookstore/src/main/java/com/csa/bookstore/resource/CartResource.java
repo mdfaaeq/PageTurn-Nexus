@@ -122,7 +122,7 @@ public class CartResource {
         
         // Checking for stock availability
         if (cartItem.getQuantity() > book.getStock()) {
-            throw new OutOfStockException("Requested quantity exceeds available stock for book ID " + item.getBookId());
+            throw new OutOfStockException("Requested quantity exceeds available stock for book ID " + bookId);
         }
         
         if (cartItem.getBookId() != bookId){
