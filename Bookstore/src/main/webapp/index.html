@@ -1,10 +1,193 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Start Page</title>
+        <title>Bookstore API Interface</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 20px;
+                line-height: 1.6;
+            }
+            h1 {
+                color: #333;
+                border-bottom: 2px solid #ddd;
+                padding-bottom: 10px;
+            }
+            h2 {
+                color: #444;
+                margin-top: 30px;
+            }
+            .endpoint {
+                background: #f5f5f5;
+                border-left: 4px solid #0066cc;
+                padding: 15px;
+                margin-bottom: 15px;
+                border-radius: 0 4px 4px 0;
+            }
+            .method {
+                display: inline-block;
+                padding: 3px 8px;
+                border-radius: 3px;
+                color: white;
+                font-weight: bold;
+                margin-right: 10px;
+                min-width: 60px;
+                text-align: center;
+            }
+            .get { background-color: #3498db; }
+            .post { background-color: #2ecc71; }
+            .put { background-color: #f39c12; }
+            .delete { background-color: #e74c3c; }
+            .url {
+                font-family: monospace;
+                background: #e9e9e9;
+                padding: 2px 5px;
+                border-radius: 3px;
+            }
+            .section {
+                margin-bottom: 40px;
+            }
+        </style>
     </head>
     <body>
-        <h1>Welcome, Bookstore API Calling</h1>
+        <h1>Welcome to Bookstore API</h1>
+        <p>Below are all the available endpoints for the Bookstore REST API.</p>
+        
+        <div class="section">
+            <h2>Books</h2>
+            <div class="endpoint">
+                <span class="method get">GET</span>
+                <span class="url">http://localhost:8080/bookstore/api/books</span>
+                <p>Get all books</p>
+            </div>
+            <div class="endpoint">
+                <span class="method get">GET</span>
+                <span class="url">http://localhost:8080/bookstore/api/books/{id}</span>
+                <p>Get book by ID</p>
+            </div>
+            <div class="endpoint">
+                <span class="method post">POST</span>
+                <span class="url">http://localhost:8080/bookstore/api/books</span>
+                <p>Create a new book</p>
+            </div>
+            <div class="endpoint">
+                <span class="method put">PUT</span>
+                <span class="url">http://localhost:8080/bookstore/api/books/{id}</span>
+                <p>Update a book</p>
+            </div>
+            <div class="endpoint">
+                <span class="method delete">DELETE</span>
+                <span class="url">http://localhost:8080/bookstore/api/books/{id}</span>
+                <p>Delete a book</p>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Authors</h2>
+            <div class="endpoint">
+                <span class="method get">GET</span>
+                <span class="url">http://localhost:8080/bookstore/api/authors</span>
+                <p>Get all authors</p>
+            </div>
+            <div class="endpoint">
+                <span class="method get">GET</span>
+                <span class="url">http://localhost:8080/bookstore/api/authors/{id}</span>
+                <p>Get author by ID</p>
+            </div>
+            <div class="endpoint">
+                <span class="method get">GET</span>
+                <span class="url">http://localhost:8080/bookstore/api/authors/{id}/books</span>
+                <p>Get books by author</p>
+            </div>
+            <div class="endpoint">
+                <span class="method post">POST</span>
+                <span class="url">http://localhost:8080/bookstore/api/authors</span>
+                <p>Create a new author</p>
+            </div>
+            <div class="endpoint">
+                <span class="method put">PUT</span>
+                <span class="url">http://localhost:8080/bookstore/api/authors/{id}</span>
+                <p>Update an author</p>
+            </div>
+            <div class="endpoint">
+                <span class="method delete">DELETE</span>
+                <span class="url">http://localhost:8080/bookstore/api/authors/{id}</span>
+                <p>Delete an author</p>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Customers</h2>
+            <div class="endpoint">
+                <span class="method get">GET</span>
+                <span class="url">http://localhost:8080/bookstore/api/customers</span>
+                <p>Get all customers</p>
+            </div>
+            <div class="endpoint">
+                <span class="method get">GET</span>
+                <span class="url">http://localhost:8080/bookstore/api/customers/{id}</span>
+                <p>Get customer by ID</p>
+            </div>
+            <div class="endpoint">
+                <span class="method post">POST</span>
+                <span class="url">http://localhost:8080/bookstore/api/customers</span>
+                <p>Create a new customer</p>
+            </div>
+            <div class="endpoint">
+                <span class="method put">PUT</span>
+                <span class="url">http://localhost:8080/bookstore/api/customers/{id}</span>
+                <p>Update a customer</p>
+            </div>
+            <div class="endpoint">
+                <span class="method delete">DELETE</span>
+                <span class="url">http://localhost:8080/bookstore/api/customers/{id}</span>
+                <p>Delete a customer</p>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Shopping Cart</h2>
+            <div class="endpoint">
+                <span class="method get">GET</span>
+                <span class="url">http://localhost:8080/bookstore/api/customers/{customerId}/cart</span>
+                <p>Get customer's cart</p>
+            </div>
+            <div class="endpoint">
+                <span class="method post">POST</span>
+                <span class="url">http://localhost:8080/bookstore/api/customers/{customerId}/cart/items</span>
+                <p>Add item to cart</p>
+            </div>
+            <div class="endpoint">
+                <span class="method put">PUT</span>
+                <span class="url">http://localhost:8080/bookstore/api/customers/{customerId}/cart/items/{bookId}</span>
+                <p>Update cart item quantity</p>
+            </div>
+            <div class="endpoint">
+                <span class="method delete">DELETE</span>
+                <span class="url">http://localhost:8080/bookstore/api/customers/{customerId}/cart/items/{bookId}</span>
+                <p>Remove item from cart</p>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Orders</h2>
+            <div class="endpoint">
+                <span class="method get">GET</span>
+                <span class="url">http://localhost:8080/bookstore/api/customers/{customerId}/orders</span>
+                <p>Get all orders for a customer</p>
+            </div>
+            <div class="endpoint">
+                <span class="method get">GET</span>
+                <span class="url">http://localhost:8080/bookstore/api/customers/{customerId}/orders/{orderId}</span>
+                <p>Get specific order by ID</p>
+            </div>
+            <div class="endpoint">
+                <span class="method post">POST</span>
+                <span class="url">http://localhost:8080/bookstore/api/customers/{customerId}/orders</span>
+                <p>Create new order from customer's cart</p>
+            </div>
+        </div>
     </body>
 </html>

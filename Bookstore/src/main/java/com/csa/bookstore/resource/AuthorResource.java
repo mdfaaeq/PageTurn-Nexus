@@ -6,12 +6,15 @@ package com.csa.bookstore.resource;
 
 import com.csa.bookstore.database.BookstoreDatabase;
 import com.csa.bookstore.entity.Author;
+import com.csa.bookstore.entity.Book;
 import com.csa.bookstore.exception.AuthorNotFoundException;
 import com.csa.bookstore.exception.InvalidInputException;
 import java.util.List;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -61,6 +64,47 @@ public class AuthorResource {
             throw new AuthorNotFoundException("Author with ID " + id + " does not exist");
         }
         return Response.ok(author).build();
+    }
+    
+    @PUT
+    @Path("/{id}")
+    public Response updateAuthor(@PathParam("id") int id, Author author){
+        Author existingAuthor = BookstoreDatabase.getAuthorById(id);
+        if (existingAuthor == null){
+            throw new AuthorNotFoundException("Author with ID " + id + " does not exist");
+        }
+        
+        // Proceeding with validation
+        if (author.getName() == null || author.getName().trim().isEmpty()){
+            throw new InvalidInputException("Author name cannot be empty");
+        }
+        
+        author.setId(id);
+        author.setBookIds(existingAuthor.getBookIds());
+        Author updateAuthor = BookstoreDatabase.updateAuthor(author);
+        return Response.ok(updateAuthor).build();
+    }
+    
+    @DELETE
+    @Path("/{id}")
+    public Response deleteAuthor(@PathParam("id") int id){
+        Author author = BookstoreDatabase.getAuthorById(id);
+        if (author == null){
+            throw new AuthorNotFoundException("Author with ID " + id + " does not exist");
+        }
+        BookstoreDatabase.deleteAuthor(id);
+        return Response.status(Response.Status.NO_CONTENT).build();
+    }
+    
+    @GET
+    @Path("/{id}/books")
+    public Response getAuthorBooks(@PathParam("id") int id){ 
+        Author author = BookstoreDatabase.getAuthorById(id);
+        if (author == null){
+            throw new AuthorNotFoundException("Author with ID " + id + " does not exist");
+        }
+        List<Book> books = BookstoreDatabase.getBooksByAuthor(id);
+        return Response.ok(books).build();
     }
     
 }
