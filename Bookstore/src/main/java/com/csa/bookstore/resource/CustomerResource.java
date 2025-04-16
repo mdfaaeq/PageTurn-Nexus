@@ -34,7 +34,7 @@ import javax.ws.rs.core.UriInfo;
 public class CustomerResource {
     
     @POST
-    public Response createCustomer(Customer customer, @Context UriInfo uriInfo) {
+    public Response createCustomer(Customer customer) {
         // Proceeding with customer validation
         if (customer.getName() == null || customer.getName().trim().isEmpty()) {
             throw new InvalidInputException("Customer name cannot be empty");

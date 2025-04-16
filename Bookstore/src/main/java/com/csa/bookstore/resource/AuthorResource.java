@@ -35,7 +35,7 @@ public class AuthorResource {
     
     // Creating a new author
     @POST
-    public Response createAuthor(Author author, @Context UriInfo uriInfo){
+    public Response createAuthor(Author author){
         // Proceeding with validation
         if (author.getName() == null || author.getName().trim().isEmpty()){
             throw new InvalidInputException("Author name cannot be empty");

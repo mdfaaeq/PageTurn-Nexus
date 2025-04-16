@@ -37,7 +37,7 @@ import javax.ws.rs.core.UriInfo;
 public class BookResource {
     
     @POST
-    public Response createBook(Book book, @Context UriInfo uriInfo) {
+    public Response createBook(Book book) {
         // Validation
         if (book.getTitle() == null || book.getTitle().trim().isEmpty()) {
             throw new InvalidInputException("Book title cannot be empty");
