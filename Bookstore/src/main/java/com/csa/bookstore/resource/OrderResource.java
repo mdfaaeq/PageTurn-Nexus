@@ -49,4 +49,20 @@ public class OrderResource {
         return Response.status(Response.Status.CREATED).entity(order).build();
     }
     
+    @GET
+    public Response getOrdersByCustomer(@PathParam("customerId") int customerId) {
+        // Check if customer exists
+        Customer customer = BookstoreDatabase.getCustomerById(customerId);
+        if (customer == null) {
+            throw new CustomerNotFoundException("Customer with ID " + customerId + " does not exist");
+        }
+        
+        List<Order> orders = BookstoreDatabase.getOrdersByCustomerId(customerId);
+        return Response.ok(orders).build();
+    }
+    
+    @GET
+    @Path("/{orderId}")
+    
+    
 }
