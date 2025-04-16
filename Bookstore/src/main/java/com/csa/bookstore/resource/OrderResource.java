@@ -11,7 +11,10 @@ import com.csa.bookstore.entity.Order;
 import com.csa.bookstore.exception.CartNotFoundException;
 import com.csa.bookstore.exception.CustomerNotFoundException;
 import com.csa.bookstore.exception.InvalidInputException;
+import com.csa.bookstore.exception.OrderNotFoundException;
+import java.util.List;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -51,7 +54,6 @@ public class OrderResource {
     
     @GET
     public Response getOrdersByCustomer(@PathParam("customerId") int customerId) {
-        // Check if customer exists
         Customer customer = BookstoreDatabase.getCustomerById(customerId);
         if (customer == null) {
             throw new CustomerNotFoundException("Customer with ID " + customerId + " does not exist");
@@ -63,6 +65,22 @@ public class OrderResource {
     
     @GET
     @Path("/{orderId}")
-    
+    public Response getOrderById(@PathParam("customerId") int customerId, @PathParam("orderId") int orderId){
+        Customer customer = BookstoreDatabase.getCustomerById(customerId);
+        if (customer == null){
+            throw new CustomerNotFoundException("Cutomer with ID " + customerId + " does not exist");
+        }
+        
+        Order order = BookstoreDatabase.getOrderById(orderId);
+        if (order == null){
+            throw new OrderNotFoundException("Order with ID " + orderId + " does not exist");
+        }
+        
+        if (order.getCustomerId() != customerId){
+            throw new OrderNotFoundException("Order with ID " + orderId + " does not belong to customer with ID " + customerId);
+        }
+        
+        return Response.ok(order).build();
+    }
     
 }
