@@ -73,7 +73,7 @@ public class CustomerResource {
     public Response updateCustomer(@PathParam("id") int id, Customer customer) {
         Customer existingCustomer = BookstoreDatabase.getCustomerById(id);
         if (existingCustomer == null) {
-            throw new CustomerNotFoundException("Customee with ID " + id + " does not exist");
+            throw new CustomerNotFoundException("Customer with ID " + id + " does not exist");
         }
         
         // Proceeding with customer validation
