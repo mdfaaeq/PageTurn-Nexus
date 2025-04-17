@@ -37,14 +37,14 @@ public class BookstoreDatabase {
     static {
         // Creating authors of books
         Author author1 = new Author(authorIdCounter++, "J.K. Rowling", "British author best known for the Harry Potter series");
-        Author author2 = new Author(authorIdCounter++, "George Orwell", "English novelist and essayist, journalist and critic");
+        Author author2 = new Author(authorIdCounter++, "Chugong", "South Korean author, best known for the web novel 'Solo Leveling'");
         
         authors.put(author1.getId(), author1);
         authors.put(author2.getId(), author2);
         
         // Create books with authors
         Book book1 = new Book(bookIdCounter++, "Harry Potter and the Philosopher's Stone", author1.getId(), "978-0-7475-3269-9", 1997, 19.99, 100);
-        Book book2 = new Book(bookIdCounter++, "1984", author2.getId(), "978-0-14-103614-4", 1949, 12.99, 50);
+        Book book2 = new Book(bookIdCounter++, "Solo Leveling, Vol. 1", author2.getId(), "978-1-9753-2554-9", 2018, 13.99, 80);
         
         books.put(book1.getId(), book1);
         books.put(book2.getId(), book2);

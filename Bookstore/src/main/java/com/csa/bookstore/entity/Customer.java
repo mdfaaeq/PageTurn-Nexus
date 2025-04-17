@@ -11,7 +11,6 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author faaeq
  */
 
-
 @XmlRootElement
 public class Customer {
     
