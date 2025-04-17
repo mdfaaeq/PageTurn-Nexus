@@ -6,7 +6,6 @@ package com.csa.bookstore.resource;
 
 import com.csa.bookstore.database.BookstoreDatabase;
 import com.csa.bookstore.entity.Customer;
-import com.csa.bookstore.exception.BookNotFoundException;
 import com.csa.bookstore.exception.CustomerNotFoundException;
 import com.csa.bookstore.exception.InvalidInputException;
 import java.util.List;
@@ -74,7 +73,7 @@ public class CustomerResource {
     public Response updateCustomer(@PathParam("id") int id, Customer customer) {
         Customer existingCustomer = BookstoreDatabase.getCustomerById(id);
         if (existingCustomer == null) {
-            throw new BookNotFoundException("Customee with ID " + id + " does not exist");
+            throw new CustomerNotFoundException("Customee with ID " + id + " does not exist");
         }
         
         // Proceeding with customer validation
@@ -100,7 +99,7 @@ public class CustomerResource {
     public Response deleteCustomer(@PathParam("id") int id) {
         Customer customer = BookstoreDatabase.getCustomerById(id);
         if (customer == null) {
-            throw new BookNotFoundException("Customer with ID " + id + " does not exist");
+            throw new CustomerNotFoundException("Customer with ID " + id + " does not exist");
         }
         
         BookstoreDatabase.deleteCustomer(id);
