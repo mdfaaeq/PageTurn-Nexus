@@ -129,7 +129,7 @@ public class CartResource {
             throw new InvalidInputException("Book ID in the path does not match the one in the request body");
         }
         
-        cart.updateItem(bookId, cartItem.getBookId());
+        cart.updateItem(bookId, cartItem.getQuantity());
         BookstoreDatabase.updateCart(cart);
         
         return Response.ok(cart).build();
