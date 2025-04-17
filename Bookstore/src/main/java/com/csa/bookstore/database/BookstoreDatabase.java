@@ -54,8 +54,8 @@ public class BookstoreDatabase {
         author2.addBookId(book2.getId());
         
         // Creating new customers in the bookstore
-        Customer customer1 = new Customer(customerIdCounter++, "John Doe", "john@example.com", "password123");
-        Customer customer2 = new Customer(customerIdCounter++, "Jane Smith", "jane@example.com", "password456");
+        Customer customer1 = new Customer(customerIdCounter++, "Faaeq Fazal", "faaeq@gmail.com", "PasswordCSA1");
+        Customer customer2 = new Customer(customerIdCounter++, "Hatim Tai", "Hatim@gmail.com", "PasswordCSA2");
         
         customers.put(customer1.getId(), customer1);
         customers.put(customer2.getId(), customer2);

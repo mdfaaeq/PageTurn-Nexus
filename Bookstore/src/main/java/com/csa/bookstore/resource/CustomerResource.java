@@ -7,6 +7,7 @@ package com.csa.bookstore.resource;
 import com.csa.bookstore.database.BookstoreDatabase;
 import com.csa.bookstore.entity.Customer;
 import com.csa.bookstore.exception.BookNotFoundException;
+import com.csa.bookstore.exception.CustomerNotFoundException;
 import com.csa.bookstore.exception.InvalidInputException;
 import java.util.List;
 import javax.ws.rs.Consumes;
@@ -63,7 +64,7 @@ public class CustomerResource {
     public Response getCustomerById(@PathParam("id") int id) {
         Customer customer = BookstoreDatabase.getCustomerById(id);
         if (customer == null) {
-            throw new BookNotFoundException("Customer with ID " + id + " does not exist");
+            throw new CustomerNotFoundException("Customer with ID " + id + " does not exist");
         }
         return Response.ok(customer).build();
     }
