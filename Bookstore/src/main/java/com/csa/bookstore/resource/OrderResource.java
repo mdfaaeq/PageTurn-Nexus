@@ -48,7 +48,7 @@ public class OrderResource {
             throw new InvalidInputException("Cannot create an order with an empty cart");
         }
         
-        Order order = BookstoreDatabase.getOrderById(customerId);
+        Order order = BookstoreDatabase.createOrder(customerId);
         return Response.status(Response.Status.CREATED).entity(order).build();
     }
     

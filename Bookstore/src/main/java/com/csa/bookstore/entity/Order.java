@@ -24,13 +24,9 @@ public class Order {
     private List<CartItem> items;
     private double total;
     
-    // "PENDING", "SHIPPED", "DELIVERED", etc.
-    private String status;
-    
     public Order() {
         this.items = new ArrayList<>();
         this.orderDate = new Date();
-        this.status = "PENDING";
     }
     
     public Order(int id, int customerId, List<CartItem> items, double total) {
@@ -39,7 +35,6 @@ public class Order {
         this.items = items;
         this.total = total;
         this.orderDate = new Date();
-        this.status = "PENDING";
     }
 
     public int getId() {
@@ -80,14 +75,6 @@ public class Order {
 
     public void setTotal(double total) {
         this.total = total;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
     
 }
