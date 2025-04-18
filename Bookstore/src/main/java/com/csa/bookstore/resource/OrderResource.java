@@ -68,7 +68,7 @@ public class OrderResource {
     public Response getOrderById(@PathParam("customerId") int customerId, @PathParam("orderId") int orderId){
         Customer customer = BookstoreDatabase.getCustomerById(customerId);
         if (customer == null){
-            throw new CustomerNotFoundException("Cutomer with ID " + customerId + " does not exist");
+            throw new CustomerNotFoundException("Customer with ID " + customerId + " does not exist");
         }
         
         Order order = BookstoreDatabase.getOrderById(orderId);
