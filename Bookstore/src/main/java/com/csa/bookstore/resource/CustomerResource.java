@@ -34,8 +34,9 @@ public class CustomerResource {
     @POST
     public Response createCustomer(Customer customer) {
         // Proceeding with customer validation
-        if (customer.getName() == null || customer.getName().trim().isEmpty()) {
-            throw new InvalidInputException("Customer name cannot be empty");
+        if (customer.getFirstName() == null || customer.getFirstName().trim().isEmpty() ||
+            customer.getLastName() == null || customer.getLastName().trim().isEmpty()) {
+            throw new InvalidInputException("Customer first name and last name cannot be empty");
         }
         
         if (customer.getEmail() == null || customer.getEmail().trim().isEmpty() || !customer.getEmail().contains("@")) {
@@ -77,8 +78,9 @@ public class CustomerResource {
         }
         
         // Proceeding with customer validation
-        if (customer.getName() == null || customer.getName().trim().isEmpty()) {
-            throw new InvalidInputException("Customer name cannot be empty");
+        if (customer.getFirstName() == null || customer.getFirstName().trim().isEmpty() ||
+            customer.getLastName() == null || customer.getLastName().trim().isEmpty()) {
+            throw new InvalidInputException("Customer first name and last name cannot be empty");
         }
         
         if (customer.getEmail() == null || customer.getEmail().trim().isEmpty() || !customer.getEmail().contains("@")) {
