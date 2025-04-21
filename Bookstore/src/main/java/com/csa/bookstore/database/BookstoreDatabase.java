@@ -36,8 +36,8 @@ public class BookstoreDatabase {
     // Initializing a few sample values in the database
     static {
         // Creating authors of books
-        Author author1 = new Author(authorIdCounter++, "J.K. Rowling", "British author best known for the Harry Potter series");
-        Author author2 = new Author(authorIdCounter++, "Chugong", "South Korean author, best known for the web novel 'Solo Leveling'");
+        Author author1 = new Author(authorIdCounter++, "J.K.", "Rowling", "British author best known for the Harry Potter series");
+        Author author2 = new Author(authorIdCounter++, "Chugong", "", "South Korean author, best known for the web novel 'Solo Leveling'");
         
         authors.put(author1.getId(), author1);
         authors.put(author2.getId(), author2);
@@ -54,8 +54,8 @@ public class BookstoreDatabase {
         author2.addBookId(book2.getId());
         
         // Creating new customers in the bookstore
-        Customer customer1 = new Customer(customerIdCounter++, "Faaeq Fazal", "faaeq@gmail.com", "PasswordCSA1");
-        Customer customer2 = new Customer(customerIdCounter++, "Hatim Tai", "Hatim@gmail.com", "PasswordCSA2");
+        Customer customer1 = new Customer(customerIdCounter++, "Faaeq", "Fazal", "faaeq@gmail.com", "PasswordCSA1");
+        Customer customer2 = new Customer(customerIdCounter++, "Hatim", "Tai", "Hatim@gmail.com", "PasswordCSA2");
         
         customers.put(customer1.getId(), customer1);
         customers.put(customer2.getId(), customer2);
