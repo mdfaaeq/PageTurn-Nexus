@@ -35,8 +35,9 @@ public class AuthorResource {
     @POST
     public Response createAuthor(Author author){
         // Proceeding with validation
-        if (author.getName() == null || author.getName().trim().isEmpty()){
-            throw new InvalidInputException("Author name cannot be empty");
+        if (author.getFirstName() == null || author.getFirstName().trim().isEmpty() ||
+            author.getLastName() == null || author.getLastName().trim().isEmpty()){
+            throw new InvalidInputException("Author first name and last name cannot be empty");
         }
         
         // Adding the author into the database
@@ -73,8 +74,9 @@ public class AuthorResource {
         }
         
         // Proceeding with validation
-        if (author.getName() == null || author.getName().trim().isEmpty()){
-            throw new InvalidInputException("Author name cannot be empty");
+        if (author.getFirstName() == null || author.getFirstName().trim().isEmpty() ||
+            author.getLastName() == null || author.getLastName().trim().isEmpty()){
+            throw new InvalidInputException("Author first name and last name cannot be empty");
         }
         
         author.setId(id);
