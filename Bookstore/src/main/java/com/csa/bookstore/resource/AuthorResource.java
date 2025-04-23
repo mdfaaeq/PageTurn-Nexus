@@ -33,7 +33,7 @@ import javax.ws.rs.core.Response;
 @Produces(MediaType.APPLICATION_JSON)
 public class AuthorResource {
     
-    private static final Logger logger = Logger.getLogger(CustomerResource.class.getName());
+    private static final Logger logger = Logger.getLogger(AuthorResource.class.getName());
     // Creating a new author
     @POST
     public Response createAuthor(Author author){
